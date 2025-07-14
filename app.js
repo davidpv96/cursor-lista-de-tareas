@@ -13,6 +13,9 @@ class GestorTareasWeb {
         
         // Cargar tareas guardadas al iniciar
         this.cargarTareas();
+
+        // Cargar tema guardado
+        this.cargarTema();
         
         // Inicializar la aplicación
         this.inicializar();
@@ -61,6 +64,11 @@ class GestorTareasWeb {
         // Botón de estadísticas
         document.getElementById('btn-estadisticas').addEventListener('click', () => {
             this.mostrarEstadisticasDetalladas();
+        });
+
+        // Botón de modo oscuro
+        document.getElementById('toggle-dark-mode').addEventListener('click', () => {
+            this.toggleDarkMode();
         });
 
         // Modales
@@ -424,11 +432,38 @@ class GestorTareasWeb {
     mostrarConfirmacion(mensaje, callback) {
         document.getElementById('mensaje-confirmacion').textContent = mensaje;
         document.getElementById('modal-confirmacion').style.display = 'block';
-        
+
         document.getElementById('btn-confirmar').onclick = () => {
             document.getElementById('modal-confirmacion').style.display = 'none';
             callback();
         };
+    }
+
+    /**
+     * Alterna entre modo claro y oscuro
+     */
+    toggleDarkMode() {
+        const body = document.body;
+        const temaActual = body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        const nuevoTema = temaActual === 'dark' ? 'light' : 'dark';
+        body.setAttribute('data-theme', nuevoTema);
+        localStorage.setItem('tema', nuevoTema);
+        const btn = document.getElementById('toggle-dark-mode');
+        if (btn) {
+            btn.textContent = nuevoTema === 'dark' ? '☀ Modo Claro' : '🌙 Modo Oscuro';
+        }
+    }
+
+    /**
+     * Carga el tema guardado desde localStorage
+     */
+    cargarTema() {
+        const temaGuardado = localStorage.getItem('tema') || 'light';
+        document.body.setAttribute('data-theme', temaGuardado);
+        const btn = document.getElementById('toggle-dark-mode');
+        if (btn) {
+            btn.textContent = temaGuardado === 'dark' ? '☀ Modo Claro' : '🌙 Modo Oscuro';
+        }
     }
 
     // ========================================
