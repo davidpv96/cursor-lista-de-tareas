@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎯 Gestor de Tareas Personales</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <h1><i class="fas fa-tasks"></i> Gestor de Tareas Personales</h1>
+        <p>Organiza tus actividades de forma sencilla y eficiente</p>
+      </header>
+
+      <!-- Panel de estadísticas -->
+      <div class="stats-panel">
+        <div class="stat-card">
+          <i class="fas fa-list"></i>
+          <div class="stat-info">
+            <span class="stat-number" id="total-tareas">0</span>
+            <span class="stat-label">Total</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-check-circle"></i>
+          <div class="stat-info">
+            <span class="stat-number" id="tareas-completadas">0</span>
+            <span class="stat-label">Completadas</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-clock"></i>
+          <div class="stat-info">
+            <span class="stat-number" id="tareas-pendientes">0</span>
+            <span class="stat-label">Pendientes</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-chart-line"></i>
+          <div class="stat-info">
+            <span class="stat-number" id="progreso">0%</span>
+            <span class="stat-label">Progreso</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario para agregar tarea -->
+      <div class="form-container">
+        <h2><i class="fas fa-plus"></i> Agregar Nueva Tarea</h2>
+        <form id="tarea-form" class="tarea-form">
+          <div class="form-group">
+            <label for="descripcion">Descripción de la tarea:</label>
+            <input
+              type="text"
+              id="descripcion"
+              name="descripcion"
+              required
+              placeholder="Ej: Completar proyecto de JavaScript"
+            />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fechaLimite">Fecha límite:</label>
+              <input type="date" id="fechaLimite" name="fechaLimite" required />
+            </div>
+
+            <div class="form-group">
+              <label for="prioridad">Prioridad:</label>
+              <select id="prioridad" name="prioridad" required>
+                <option value="">Selecciona prioridad</option>
+                <option value="1">🔴 Alta</option>
+                <option value="2">🟡 Media</option>
+                <option value="3">🟢 Baja</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Agregar Tarea
+          </button>
+        </form>
+      </div>
+
+      <!-- Filtros y controles -->
+      <div class="controls">
+        <div class="filter-group">
+          <label for="filtro-estado">Filtrar por estado:</label>
+          <select id="filtro-estado" class="filter-select">
+            <option value="todas">Todas las tareas</option>
+            <option value="pendientes">Solo pendientes</option>
+            <option value="completadas">Solo completadas</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="ordenar-por">Ordenar por:</label>
+          <select id="ordenar-por" class="filter-select">
+            <option value="fecha">Fecha límite</option>
+            <option value="prioridad">Prioridad</option>
+            <option value="creacion">Fecha de creación</option>
+          </select>
+        </div>
+
+        <button id="btn-estadisticas" class="btn btn-secondary">
+          <i class="fas fa-chart-bar"></i> Ver Estadísticas
+        </button>
+      </div>
+
+      <!-- Lista de tareas -->
+      <div class="tareas-container">
+        <h2><i class="fas fa-list-ul"></i> Lista de Tareas</h2>
+        <div id="tareas-lista" class="tareas-lista">
+          <!-- Las tareas se cargarán dinámicamente aquí -->
+        </div>
+      </div>
+
+      <!-- Modal de estadísticas -->
+      <div id="modal-estadisticas" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3><i class="fas fa-chart-bar"></i> Estadísticas Detalladas</h3>
+            <span class="close">&times;</span>
+          </div>
+          <div class="modal-body">
+            <div id="estadisticas-detalladas">
+              <!-- Estadísticas se cargarán aquí -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal de confirmación -->
+      <div id="modal-confirmacion" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>
+              <i class="fas fa-exclamation-triangle"></i> Confirmar Acción
+            </h3>
+            <span class="close">&times;</span>
+          </div>
+          <div class="modal-body">
+            <p id="mensaje-confirmacion"></p>
+          </div>
+          <div class="modal-footer">
+            <button id="btn-confirmar" class="btn btn-danger">Confirmar</button>
+            <button id="btn-cancelar" class="btn btn-secondary">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notificaciones -->
+    <div id="notificacion" class="notificacion"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
