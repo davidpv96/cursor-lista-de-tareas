@@ -10,6 +10,7 @@ Una aplicación web moderna y responsive para gestionar tareas personales con un
 - **Interfaz intuitiva** con iconos y colores atractivos
 - **Animaciones suaves** para una mejor experiencia de usuario
 - **Tema moderno** con gradientes y sombras elegantes
+- **Modo oscuro** opcional con botón de activación
 
 ### 📊 Panel de Estadísticas en Tiempo Real
 
